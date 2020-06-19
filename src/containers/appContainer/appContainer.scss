@@ -1,0 +1,17 @@
+@import '../../styles/base';
+
+.AppContainer {
+  height: $appheight;
+  width: $appWidth;
+  display: flex;
+  font-family: 'Montserrat';
+
+  &__side-menu {
+    display: flex;
+    width: $sideMenuWidth;
+  }
+
+  &__content {
+    @include mixin-flex;
+  }
+}

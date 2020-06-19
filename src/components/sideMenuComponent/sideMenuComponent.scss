@@ -1,0 +1,72 @@
+@import '../../styles/base';
+
+@mixin menu-item {
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  background-size: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.SideMenuComponent {
+  background-color: $color-background-primary;
+  padding: 5px 0;
+
+  &__button {
+    @include menu-item;
+
+    &_opaque {
+      opacity: 0.5;
+    }
+
+    &:hover,
+    &_state-selected {
+      opacity: 1;
+    }
+
+    &:visited,
+    &:hover,
+    &:active {
+      color: transparent;
+    }
+
+    //To override rsuite icon size
+    /* stylelint-disable */
+    .rs-icon {
+      font-size: 24px;
+    }
+    /* stylelint-enable */
+    &-icon {
+      color: $color-text-primary;
+      max-width: 28px;
+    }
+
+    &_selected {
+      opacity: 1;
+      color: $color-background-secondary;
+    }
+  }
+
+  &__icon {
+    @include menu-item;
+    color: $color-text-primary;
+  }
+
+  &__status-badge {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+
+    &_state-online {
+      background-color: $color-success;
+    }
+  }
+}

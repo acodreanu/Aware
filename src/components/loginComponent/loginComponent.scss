@@ -1,0 +1,48 @@
+.LoginComponent {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  width: 300px;
+
+  &__input-group {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  &_animated {
+    animation-name: drop;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    z-index: -1;
+  }
+
+  &__input {
+    max-width: 200px;
+  }
+
+  &__label {
+    margin-right: 5px;
+  }
+
+  &__logIn {
+    margin-top: 10px;
+  }
+}
+
+@keyframes drop {
+  0% {
+    top: -150px;
+  }
+  90% {
+    z-index: -1;
+  }
+  100% {
+    top: 0px;
+    z-index: auto;
+  }
+}

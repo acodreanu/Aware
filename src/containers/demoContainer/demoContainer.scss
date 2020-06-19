@@ -1,0 +1,55 @@
+//BEM block
+//Root rule name mast be the same of file name
+.DemoContainer {
+  text-align: center;
+
+  //As a sample usage of modifiers.
+  //BEM modifier
+  &_size-big {
+    width: 100%;
+  }
+
+  //BEM element
+  &__logo {
+    animation: HomeContainer-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  //BEM element
+  &__header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  //BEM element
+  &__link {
+    color: #61dafb;
+
+    &:visited {
+      color: lightsteelblue;
+    }
+
+    //As a sample usage of modifiers.
+    //BEM modifier
+    &_color-red {
+      color: red;
+    }
+  }
+}
+
+//No support for keyframe namings
+@keyframes HomeContainer-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

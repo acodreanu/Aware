@@ -1,0 +1,11 @@
+@import '../../styles/base';
+
+.PageWithSidePanelComponent {
+  &__side-bar {
+    display: flex;
+  }
+
+  &__content {
+    @include mixin-flex;
+  }
+}

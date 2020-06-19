@@ -1,0 +1,40 @@
+.HomeContainer {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+
+  &__logo {
+    order: 1;
+    font-size: 44px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__welcome {
+    order: 2;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &__buttons {
+    order: 3;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &__button {
+    margin: 0 5px;
+  }
+
+  // &__google-login {
+  //   order: 3;
+  //   margin-top: 10px;
+  //   margin-bottom: 10px;
+  //   margin-right: auto;
+  //   margin-left: auto;
+  // }
+}

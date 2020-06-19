@@ -1,0 +1,53 @@
+$appheight: 100vh;
+$appWidth: 100vw;
+$sideMenuWidth: 50px;
+
+// colors
+$color-background-primary: #132138;
+$color-background-primary-light: #1b3358;
+$color-background-primary-lighter: #214077;
+$color-text-primary: #ffffff;
+
+$color-background-secondary: #f36111;
+$color-background-secondary-dark: #d24a00;
+$color-background-secondary-light: #ff7f39;
+$color-background-secondary-lighter: #ff9961;
+
+$button-background-color: #ff4f00;
+
+$color-success: #36f441;
+$fontsize-small: 12px;
+$fontsize-medium: 16px;
+$fontsize-big: 21px;
+
+$control-height: 30px;
+
+//mixins
+@mixin mixin-flex {
+  flex: 1;
+  display: flex;
+}
+
+@mixin center-content {
+  @include mixin-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//spaces (margin and paddings)
+$space-size-default: 10px;
+
+@mixin mixin-button($bgColor: $button-background-color, $height: 50px) {
+  flex: 1;
+
+  background-color: $bgColor;
+  color: $color-text-primary;
+  height: $height;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: darken($color: $bgColor, $amount: 10%);
+    color: $color-text-primary;
+  }
+}

@@ -1,0 +1,37 @@
+@import '../../styles/base';
+
+.SidePanelComponent {
+  background-color: $color-background-primary-light;
+  width: 100%;
+
+  &__logo {
+    background-image: url('./images/logo.png');
+    height: 50px;
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__title {
+    text-align: center;
+    background-color: $color-background-primary-lighter;
+    padding: 5px 0;
+    color: white;
+    font-weight: bold;
+  }
+
+  &__content,
+  &__footer {
+    padding: $space-size-default;
+  }
+
+  &__history-button {
+    position: absolute;
+    /* stylelint-disable */
+    .rs-btn-lg.rs-btn-icon > .rs-icon {
+      font-size: 24px;
+      color: white;
+    }
+    /* stylelint-enable */
+  }
+}
