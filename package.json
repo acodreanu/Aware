@@ -28,7 +28,7 @@
     "@types/sinon": "7.5.1",
     "@typescript-eslint/eslint-plugin": "2.12.0",
     "@typescript-eslint/parser": "2.12.0",
-    "auth0-js": "9.12.2",
+    "auth0-js": "9.13.2",
     "axios": "0.19.2",
     "classnames": "2.2.6",
     "connected-react-router": "6.8.0",
