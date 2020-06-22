@@ -13,8 +13,6 @@ import { push } from 'connected-react-router';
 
 function* signOut() {
   yield call([localStorage, localStorage.removeItem], CommonConstants.AccessToken);
-  // yield put(push(urlHelper.routes.root));
-  console.log('hereeee');
   yield put(push('/'));
   NotificationHelper.success('Logged out!');
 }

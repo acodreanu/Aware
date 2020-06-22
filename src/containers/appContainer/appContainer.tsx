@@ -1,6 +1,6 @@
 import loadable from '@loadable/component';
 import React, { useEffect, Dispatch } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Loader } from 'rsuite';
 
 import { CommonConstants } from '../../domain/constants/commonConstants';
@@ -10,9 +10,9 @@ import { IAppState } from '../../store/appState';
 import { AppActionTypes } from '../../store/appActionTypes';
 import { AuthActionCreators } from '../../store/actionCreators/authActionsCreators';
 import { ActiveSection } from '../../domain/enums/activeSection';
+import { RoleType } from '../../domain/enums/roleType';
 
 import './appContainer.scss';
-import { RoleType } from '../../domain/enums/roleType';
 
 const demoContainerLoader = loadable(
   () => import('../demoContainer/demoContainer' /* webpackChunkName: 'demoContainer' */),
@@ -64,20 +64,18 @@ const AppContainer: React.FC = () => {
 
   return (
     <div className="AppContainer">
-      <BrowserRouter>
-        {isAuthenticated && (
-          <div className="AppContainer__side-menu">
-            <SideMenuComponent onLogoutClick={signOut} activeSection={activeSection} roleType={roleType} />
-          </div>
-        )}
-        <div className="AppContainer__content">
-          <Switch>
-            <Route exact={true} path="/" component={homeContainerLoader} />
-            <Route exact={true} path="/user-management" component={userManagementContainerLoader} />
-            <Route exact={true} path="/example" component={demoContainerLoader} />
-          </Switch>
+      {isAuthenticated && (
+        <div className="AppContainer__side-menu">
+          <SideMenuComponent onLogoutClick={signOut} activeSection={activeSection} roleType={roleType} />
         </div>
-      </BrowserRouter>
+      )}
+      <div className="AppContainer__content">
+        <Switch>
+          <Route exact={true} path="/user-management" component={userManagementContainerLoader} />
+          <Route exact={true} path="/example" component={demoContainerLoader} />
+          <Route exact={true} path="/" component={homeContainerLoader} />
+        </Switch>
+      </div>
     </div>
   );
 };

@@ -8,9 +8,9 @@ import { IAppState } from '../../store/appState';
 import { AuthActionCreators } from '../../store/actionCreators/authActionsCreators';
 import { HomeActionCreators } from '../../store/actionCreators/homeActionCreators';
 import LoginComponent from '../../components/loginComponent/loginComponent';
+import { RoleType } from '../../domain/enums/roleType';
 
 import './homeContainer.scss';
-import { RoleType } from '../../domain/enums/roleType';
 
 export interface IHomeContainerProps {
   loggingIn: boolean;
@@ -39,43 +39,45 @@ const HomeContainer: React.FC<IHomeContainerProps> = (properties: IHomeContainer
     dispatch(AuthActionCreators.signIn(email, password));
   };
 
-  console.log(properties.isAuthenticated);
+  console.log(name);
 
   const renderMainPart = () => {
-    // if (name) {
-    return (
-      <>
-        <div className="HomeContainer__welcome">
-          <h6>Welcome {name}!</h6>
-        </div>
+    if (name) {
+      return (
+        <>
+          <div className="HomeContainer__welcome">
+            <h6>Welcome {name}!</h6>
+          </div>
+        </>
+      );
+    } else {
+      return (
         <div className="HomeContainer__buttons">
-          {!properties.isAuthenticated ? (
-            <>
-              <Button className="HomeContainer__button" color="orange" size="lg" onClick={onSignInClick}>
-                Login
-              </Button>
-              <Button className="HomeContainer__button" color="cyan" size="lg" onClick={onSignUpClick}>
-                Sign Up
-              </Button>
-              {properties.signingUp ? <SignupComponent onSubmit={onSignUpSubmit}></SignupComponent> : null}
-              {properties.loggingIn ? <LoginComponent onSubmit={onLoginSubmit}></LoginComponent> : null}
-            </>
-          ) : null}
+          {/* {!properties.isAuthenticated ? ( */}
+          <>
+            <Button className="HomeContainer__button" color="orange" size="lg" onClick={onSignInClick}>
+              Login
+            </Button>
+            <Button className="HomeContainer__button" color="cyan" size="lg" onClick={onSignUpClick}>
+              Sign Up
+            </Button>
+            {properties.signingUp ? <SignupComponent onSubmit={onSignUpSubmit}></SignupComponent> : null}
+            {properties.loggingIn ? <LoginComponent onSubmit={onLoginSubmit}></LoginComponent> : null}
+          </>
+          {/* ) : null} */}
         </div>
-      </>
-    );
-    // } //else {
-    // return (
-    // <GoogleLogin
-    //   clientId="588601611917-cljbf777480t1rkq6ggfctkmebflmi0k.apps.googleusercontent.com"
-    //   buttonText="Sign In with Google"
-    //   onFailure={errorHandler}
-    //   cookiePolicy={'single_host_origin'}
-    //   className="HomeContainer__google-login"
-    //   theme="dark"
-    // />
-    // );
-    // }
+      );
+      // return (
+      // <GoogleLogin
+      //   clientId="588601611917-cljbf777480t1rkq6ggfctkmebflmi0k.apps.googleusercontent.com"
+      //   buttonText="Sign In with Google"
+      //   onFailure={errorHandler}
+      //   cookiePolicy={'single_host_origin'}
+      //   className="HomeContainer__google-login"
+      //   theme="dark"
+      // />
+      // );
+    }
   };
 
   return (
