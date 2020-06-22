@@ -57,7 +57,7 @@ const renderManagerItems = (selected?: ActiveSection) => {
 // };
 
 const SideMenuComponent: React.FC<ISideMenuComponentProps> = (properties: ISideMenuComponentProps) => {
-  console.log(properties.roleType)
+  console.log(properties.roleType);
   const renderUpsideItems = () => {
     if (properties.roleType === RoleType.Manager) {
       return renderManagerItems(properties.activeSection);
