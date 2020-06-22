@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import { ActiveSection } from '../../domain/enums/activeSection';
 
 import './sideMenuComponent.scss';
+import { RoleType } from '../../domain/enums/roleType';
 
 export interface ISideMenuComponentProps {
   profileImageUrl?: string;
   activeSection?: ActiveSection;
   onLogoutClick: () => void;
+  roleType?: RoleType;
 }
 
 const linkClass = (icon: ActiveSection, selected?: ActiveSection) =>
@@ -55,10 +57,11 @@ const renderManagerItems = (selected?: ActiveSection) => {
 // };
 
 const SideMenuComponent: React.FC<ISideMenuComponentProps> = (properties: ISideMenuComponentProps) => {
+  console.log(properties.roleType)
   const renderUpsideItems = () => {
-    // if (properties.roleType === RoleType.Manager) {
-    return renderManagerItems(properties.activeSection);
-    // } else {
+    if (properties.roleType === RoleType.Manager) {
+      return renderManagerItems(properties.activeSection);
+    } //else {
     // return renderAgentItems(properties.activeSection);
     // }
   };

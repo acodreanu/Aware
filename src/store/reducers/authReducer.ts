@@ -4,7 +4,6 @@ import { IAuthState, initialAuthState } from '../states/authState';
 export const authReducer = (state: IAuthState = initialAuthState, action: AuthActionTypes): IAuthState => {
   switch (action.type) {
     case USER_PROFILE_LOADED: {
-      console.log('profile loaded');
       return {
         ...state,
         user: action.user,
@@ -12,6 +11,7 @@ export const authReducer = (state: IAuthState = initialAuthState, action: AuthAc
       };
     }
     case SIGN_OUT: {
+      console.log('isAuthenticated: false');
       return {
         ...state,
         isAuthenticated: false

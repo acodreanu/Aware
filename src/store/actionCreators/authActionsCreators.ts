@@ -11,6 +11,7 @@ import {
   SIGN_OUT
 } from '../actionTypes/authActionTypes';
 import { IUser } from '../../domain/models/user';
+import { RoleType } from '../../domain/enums/roleType';
 
 const handleAuthentication = (tokenId: string): HandleAuthentication => {
   return {
@@ -26,10 +27,11 @@ const userProfileLoaded = (user: IUser): UserProfileLoaded => {
   };
 };
 
-const signUp = (email: string, password: string, confirmPassword: string): SignUp => {
+const signUp = (email: string, role: RoleType, password: string, confirmPassword: string): SignUp => {
   return {
     type: SIGN_UP,
     email: email,
+    role: role,
     password: password,
     confirmPassword: confirmPassword
   };

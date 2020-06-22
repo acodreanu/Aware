@@ -1,5 +1,13 @@
-import { LoadUsers, LOAD_USERS, UsersLoaded, USERS_LOADED } from '../actionTypes/userManagementTypes';
+import {
+  LoadUsers,
+  LOAD_USERS,
+  UsersLoaded,
+  USERS_LOADED,
+  SaveUser,
+  SAVE_USER
+} from '../actionTypes/userManagementTypes';
 import { IUser } from '../../domain/models/user';
+import { IUserForSaving } from '../../domain/models/userForSaving';
 
 const loadUsers = (): LoadUsers => {
   return {
@@ -14,4 +22,11 @@ const usersLoaded = (users: IUser[]): UsersLoaded => {
   };
 };
 
-export const UserManagementActionCreators = { loadUsers, usersLoaded };
+const saveUser = (user: IUserForSaving): SaveUser => {
+  return {
+    type: SAVE_USER,
+    user: user
+  };
+};
+
+export const UserManagementActionCreators = { loadUsers, usersLoaded, saveUser };

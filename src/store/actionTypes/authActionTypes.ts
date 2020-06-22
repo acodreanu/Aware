@@ -1,4 +1,5 @@
 import { IUser } from '../../domain/models/user';
+import { RoleType } from '../../domain/enums/roleType';
 
 export const USER_PROFILE_LOADED = 'USER_PROFILE_LOADED';
 export const HANDLE_AUTHENTICATION = 'HANDLE_AUTHENTICATION';
@@ -29,6 +30,7 @@ export type SignOut = {
 export type SignUp = {
   type: typeof SIGN_UP;
   email: string;
+  role: RoleType;
   password: string;
   confirmPassword: string;
 };

@@ -12,6 +12,7 @@ import { AuthActionCreators } from '../../store/actionCreators/authActionsCreato
 import { ActiveSection } from '../../domain/enums/activeSection';
 
 import './appContainer.scss';
+import { RoleType } from '../../domain/enums/roleType';
 
 const demoContainerLoader = loadable(
   () => import('../demoContainer/demoContainer' /* webpackChunkName: 'demoContainer' */),
@@ -43,6 +44,7 @@ const multiTabLogoutHandler = (event: StorageEvent) => {
 
 const AppContainer: React.FC = () => {
   const isAuthenticated = useSelector<IAppState, boolean>(s => s.authState.isAuthenticated);
+  const roleType = useSelector<IAppState, RoleType | undefined>(s => s.authState.user?.role);
   const activeSection = useSelector<IAppState, ActiveSection | undefined>(s => s.homeState.activeSection);
   // const picture = useSelector<IAppState, string>(s => s.authState.user.pictureUrl as string);
 
@@ -65,7 +67,7 @@ const AppContainer: React.FC = () => {
       <BrowserRouter>
         {isAuthenticated && (
           <div className="AppContainer__side-menu">
-            <SideMenuComponent onLogoutClick={signOut} activeSection={activeSection} />
+            <SideMenuComponent onLogoutClick={signOut} activeSection={activeSection} roleType={roleType} />
           </div>
         )}
         <div className="AppContainer__content">

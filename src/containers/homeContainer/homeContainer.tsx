@@ -10,6 +10,7 @@ import { HomeActionCreators } from '../../store/actionCreators/homeActionCreator
 import LoginComponent from '../../components/loginComponent/loginComponent';
 
 import './homeContainer.scss';
+import { RoleType } from '../../domain/enums/roleType';
 
 export interface IHomeContainerProps {
   loggingIn: boolean;
@@ -31,12 +32,14 @@ const HomeContainer: React.FC<IHomeContainerProps> = (properties: IHomeContainer
   };
 
   const onSignUpSubmit = (email: string, password: string, confirmPassword: string) => {
-    dispatch(AuthActionCreators.signUp(email, password, confirmPassword));
+    dispatch(AuthActionCreators.signUp(email, RoleType.Manager, password, confirmPassword));
   };
 
   const onLoginSubmit = (email: string, password: string) => {
     dispatch(AuthActionCreators.signIn(email, password));
   };
+
+  console.log(properties.isAuthenticated);
 
   const renderMainPart = () => {
     // if (name) {

@@ -1,10 +1,18 @@
 import { createApiClient } from '../utils/httpClient';
 import { IUser } from '../domain/models/user';
+import { RoleType } from '../domain/enums/roleType';
+import { IUserForSaving } from '../domain/models/userForSaving';
 
-async function signUp(email: string, password: string, confirmPassword: string): Promise<IUser | undefined> {
+async function signUp(
+  email: string,
+  role: RoleType,
+  password: string,
+  confirmPassword: string
+): Promise<IUser | undefined> {
   const apiClient = createApiClient();
   const model = {
     email: email,
+    role: role,
     password: password,
     confirmPassword: confirmPassword
   };
@@ -43,4 +51,15 @@ async function getUsers(): Promise<IUser[] | undefined> {
   }
 }
 
-export { signUp, login, getUsers };
+async function saveUser(user: IUserForSaving): Promise<boolean> {
+  const apiClient = createApiClient();
+
+  try {
+    const response = await apiClient.post<boolean, IUserForSaving>('users/', user);
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+}
+
+export { signUp, login, getUsers, saveUser };

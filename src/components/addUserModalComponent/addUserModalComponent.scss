@@ -1,0 +1,28 @@
+.AddUserModalComponent {
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  &__save-button {
+    margin-top: 20px;
+  }
+
+  &__label {
+    align-self: center;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  &__input {
+    max-width: 70%;
+  }
+}

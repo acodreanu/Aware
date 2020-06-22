@@ -11,6 +11,8 @@ import PageWithSidePanelComponent from '../../components/pageWithSidePanelCompon
 import './userManagementContainer.scss';
 import classNames from 'classnames';
 import UsersManagementComponent from '../../components/usersManagementComponent/usersManagementComponent';
+import AddUserModalComponent from '../../components/addUserModalComponent/addUserModalComponent';
+import { IUserForSaving } from '../../domain/models/userForSaving';
 
 export interface IUserManagementContainerProps {
   users?: IUser[];
@@ -19,7 +21,8 @@ export interface IUserManagementContainerProps {
 const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props: IUserManagementContainerProps) => {
   const dispatch = useDispatch<Dispatch<AppActionTypes>>();
 
-  const [selected, setSelected] = useState<'Users' | 'AddUser'>();
+  const [selected, setSelected] = useState<'Users'>();
+  const [addUserOpen, setAddUserOpen] = useState(false);
 
   useEffect(() => {
     dispatch(HomeActionCreators.changeActiveSection(ActiveSection.UserManager));
@@ -38,16 +41,22 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
   };
 
   const addUserClicked = () => {
-    setSelected('AddUser');
+    setAddUserOpen(true);
+  };
+
+  const onCloseAddUserModal = () => {
+    setAddUserOpen(false);
+  };
+
+  const onSaveUser = (user: IUserForSaving) => {
+    dispatch(UserManagementActionCreators.saveUser(user));
   };
 
   const sideContent = () => {
     const usersClass = classNames('UserManagementContainer__option', {
       'UserManagementContainer__option_selected': selected === 'Users'
     });
-    const addUserClass = classNames('UserManagementContainer__option', {
-      'UserManagementContainer__option_selected': selected === 'AddUser'
-    });
+    const addUserClass = classNames('UserManagementContainer__option');
 
     return (
       <div className="UserManagementContainer__side-content">
@@ -62,17 +71,14 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
   };
 
   return (
-    // <div className="UserManagementContainer">
-    //   <h4>Users</h4>
-    //   {props.users.map(user => {
-    //     return <p key={user.email}>{user.email}</p>;
-    //   })}
-    // </div>
-    <PageWithSidePanelComponent
-      sidePanelContent={sideContent()}
-      showHistoryBack={true}
-      pageContent={selected === 'Users' ? <UsersManagementComponent users={props.users} /> : null}
-    />
+    <>
+      <PageWithSidePanelComponent
+        sidePanelContent={sideContent()}
+        showHistoryBack={true}
+        pageContent={selected === 'Users' ? <UsersManagementComponent users={props.users} /> : null}
+      />
+      <AddUserModalComponent onSubmit={onSaveUser} visible={addUserOpen} onClose={onCloseAddUserModal} />
+    </>
   );
 };
 

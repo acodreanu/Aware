@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { LOAD_USERS } from '../actionTypes/userManagementTypes';
+import { LOAD_USERS, SAVE_USER, SaveUser } from '../actionTypes/userManagementTypes';
 import { IUser } from '../../domain/models/user';
-import { getUsers } from '../../services/userService';
+import { getUsers, saveUser } from '../../services/userService';
 import { UserManagementActionCreators } from '../actionCreators/userManagementActionCreators';
 import { NotificationHelper } from '../../utils/notificationHelper';
 
@@ -16,10 +16,22 @@ function* loadUsersApiCall() {
   }
 }
 
+function* saveUserApiCall(action: SaveUser) {
+  const result: IUser = yield call(saveUser, action.user);
+
+  if (result) {
+    NotificationHelper.success('User created!');
+  }
+}
+
 function* loadUsersGenerator() {
   yield takeLatest(LOAD_USERS, loadUsersApiCall);
 }
 
+function* saveUserGenerator() {
+  yield takeLatest(SAVE_USER, saveUserApiCall);
+}
+
 export default function* userManagementSaga() {
-  yield all([loadUsersGenerator()]);
+  yield all([loadUsersGenerator(), saveUserGenerator()]);
 }

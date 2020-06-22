@@ -14,6 +14,7 @@ import { push } from 'connected-react-router';
 function* signOut() {
   yield call([localStorage, localStorage.removeItem], CommonConstants.AccessToken);
   // yield put(push(urlHelper.routes.root));
+  console.log('hereeee')
   yield put(push('/'));
   NotificationHelper.success('Logged out!');
 }
@@ -47,7 +48,7 @@ function* checkUserInfo() {
 }
 
 function* signUpApiCall(action: SignUp) {
-  const result: IUser = yield call(signUp, action.email, action.password, action.confirmPassword);
+  const result: IUser = yield call(signUp, action.email, action.role, action.password, action.confirmPassword);
 
   if (result) {
     NotificationHelper.success('User created!');
@@ -64,6 +65,8 @@ function* signInApiCall(action: SignIn) {
     yield put(HomeActionCreators.loggingIn(false));
 
     yield checkUserInfo();
+  } else {
+    NotificationHelper.error('Failed to login! (Server error)');
   }
 }
 
