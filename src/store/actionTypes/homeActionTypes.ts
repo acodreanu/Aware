@@ -39,7 +39,7 @@ export type LoggingIn = {
 
 export type ChangeActiveSection = {
   type: typeof CHANGE_ACTIVE_SECTION;
-  secton: ActiveSection;
+  secton?: ActiveSection;
 };
 
 export type HomeActionTypes =

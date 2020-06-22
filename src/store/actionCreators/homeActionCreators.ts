@@ -57,7 +57,7 @@ const loggingIn = (state: boolean): LoggingIn => {
   };
 };
 
-const changeActiveSection = (section: ActiveSection): ChangeActiveSection => {
+const changeActiveSection = (section?: ActiveSection): ChangeActiveSection => {
   return {
     type: CHANGE_ACTIVE_SECTION,
     secton: section

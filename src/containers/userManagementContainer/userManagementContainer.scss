@@ -1,0 +1,22 @@
+@import '../../styles/base';
+
+.UserManagementContainer {
+  &__side-content {
+    margin: 10px 15px;
+    color: white;
+  }
+
+  &__option {
+    margin-bottom: 20px;
+    font-weight: 600;
+
+    &:hover {
+      color: $color-background-secondary;
+      cursor: pointer;
+    }
+
+    &_selected {
+      color: $color-background-secondary;
+    }
+  }
+}

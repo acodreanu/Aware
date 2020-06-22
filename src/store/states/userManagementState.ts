@@ -1,9 +1,9 @@
 import { IUser } from '../../domain/models/user';
 
 export interface IUserManagementState {
-  readonly users: IUser[];
+  readonly users?: IUser[];
 }
 
 export const initialUserManagementState: IUserManagementState = {
-  users: []
+  users: undefined
 };

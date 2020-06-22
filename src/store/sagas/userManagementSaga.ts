@@ -3,13 +3,16 @@ import { LOAD_USERS } from '../actionTypes/userManagementTypes';
 import { IUser } from '../../domain/models/user';
 import { getUsers } from '../../services/userService';
 import { UserManagementActionCreators } from '../actionCreators/userManagementActionCreators';
+import { NotificationHelper } from '../../utils/notificationHelper';
 
 function* loadUsersApiCall() {
-  console.log('here');
   const result: IUser[] = yield call(getUsers);
 
   if (result) {
     yield put(UserManagementActionCreators.usersLoaded(result));
+  } else {
+    NotificationHelper.error('Could not retrieve users!');
+    yield put(UserManagementActionCreators.usersLoaded([]));
   }
 }
 

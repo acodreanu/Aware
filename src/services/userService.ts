@@ -22,6 +22,7 @@ async function login(email: string, password: string): Promise<string | undefine
     email: email,
     password: password
   };
+
   try {
     const response = await apiClient.post<string, typeof model>('auth/login', model);
     return response.data;
@@ -30,11 +31,16 @@ async function login(email: string, password: string): Promise<string | undefine
   }
 }
 
-async function getUsers(): Promise<IUser[]> {
+async function getUsers(): Promise<IUser[] | undefined> {
   const apiClient = createApiClient();
-  const response = await apiClient.get<IUser[]>('user/');
+  // const response = await apiClient.get<IUser[]>('users/');
 
-  return response.data;
+  try {
+    const response = await apiClient.get<IUser[]>('users/');
+    return response.data;
+  } catch (err) {
+    return undefined;
+  }
 }
 
 export { signUp, login, getUsers };
