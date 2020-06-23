@@ -62,4 +62,15 @@ async function saveUser(user: IUserForSaving): Promise<boolean> {
   }
 }
 
-export { signUp, login, getUsers, saveUser };
+async function deleteUser(email: string): Promise<boolean> {
+  const apiClient = createApiClient();
+
+  try {
+    const response = await apiClient.delete<boolean>('users/' + email);
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+}
+
+export { signUp, login, getUsers, saveUser, deleteUser };

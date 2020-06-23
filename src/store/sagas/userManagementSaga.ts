@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { LOAD_USERS, SAVE_USER, SaveUser } from '../actionTypes/userManagementTypes';
+import { LOAD_USERS, SAVE_USER, SaveUser, DELETE_USER, DeleteUser } from '../actionTypes/userManagementTypes';
 import { IUser } from '../../domain/models/user';
-import { getUsers, saveUser } from '../../services/userService';
+import { getUsers, saveUser, deleteUser } from '../../services/userService';
 import { UserManagementActionCreators } from '../actionCreators/userManagementActionCreators';
 import { NotificationHelper } from '../../utils/notificationHelper';
 
@@ -21,6 +21,18 @@ function* saveUserApiCall(action: SaveUser) {
 
   if (result) {
     NotificationHelper.success('User created!');
+  } else {
+    NotificationHelper.error('Failed to created user!');
+  }
+}
+
+function* deleteUserApiCall(action: DeleteUser) {
+  const result: IUser = yield call(deleteUser, action.email);
+
+  if (result) {
+    NotificationHelper.success('User deleted!');
+  } else {
+    NotificationHelper.error('Failed to delete user!');
   }
 }
 
@@ -32,6 +44,10 @@ function* saveUserGenerator() {
   yield takeLatest(SAVE_USER, saveUserApiCall);
 }
 
+function* deleteUserGenerator() {
+  yield takeLatest(DELETE_USER, deleteUserApiCall);
+}
+
 export default function* userManagementSaga() {
-  yield all([loadUsersGenerator(), saveUserGenerator()]);
+  yield all([loadUsersGenerator(), saveUserGenerator(), deleteUserGenerator()]);
 }

@@ -4,7 +4,13 @@ import {
   UsersLoaded,
   USERS_LOADED,
   SaveUser,
-  SAVE_USER
+  SAVE_USER,
+  DeleteUser,
+  DELETE_USER,
+  UserSaved,
+  UserDeleted,
+  USER_DELETED,
+  USER_SAVED
 } from '../actionTypes/userManagementTypes';
 import { IUser } from '../../domain/models/user';
 import { IUserForSaving } from '../../domain/models/userForSaving';
@@ -29,4 +35,25 @@ const saveUser = (user: IUserForSaving): SaveUser => {
   };
 };
 
-export const UserManagementActionCreators = { loadUsers, usersLoaded, saveUser };
+const userSaved = (user: IUser): UserSaved => {
+  return {
+    type: USER_SAVED,
+    user: user
+  };
+};
+
+const deleteUser = (email: string): DeleteUser => {
+  return {
+    type: DELETE_USER,
+    email: email
+  };
+};
+
+const userDeleted = (email: string): UserDeleted => {
+  return {
+    type: USER_DELETED,
+    email: email
+  };
+};
+
+export const UserManagementActionCreators = { loadUsers, usersLoaded, saveUser, userSaved, deleteUser, userDeleted };

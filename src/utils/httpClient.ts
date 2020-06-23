@@ -47,17 +47,17 @@ function responseErrorInterceptor(error: AxiosError) {
   } else {
     if (error.response) {
       if (error.response.data && error.response.data.message) {
-        // console.log(error.response);
+        console.log(error.response);
         // console.log(error.response.data.message);
         const apiServiceError = error.response.data;
 
-        if (typeof error.response.data.message === 'string') {
-          NotificationHelper.error(error.response.statusText, error.response.data.message);
-        } else {
-          (apiServiceError.data as [{ msg: string }]).forEach(err => {
-            NotificationHelper.error(apiServiceError.message, err.msg);
-          });
-        }
+        // if (typeof error.response.data.message === 'string') {
+        //   NotificationHelper.error(error.response.statusText, error.response.data.message);
+        // } else {
+        (apiServiceError.data as [{ msg: string }]).forEach(err => {
+          NotificationHelper.error(apiServiceError.message, err.msg);
+        });
+        // }
       } else {
         const errorResponse = mapResponse(error.response);
         NotificationHelper.error(errorResponse.status, errorResponse.statusText);

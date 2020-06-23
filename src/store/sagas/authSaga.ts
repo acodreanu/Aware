@@ -31,6 +31,8 @@ function* checkUserInfo() {
   const profile: IJwtToken = yield call(jwtDecode, token);
   const now: number = yield call(Date.now);
 
+  // console.log(profile.exp * 1000);
+  // console.log(now);
   if (profile.exp * 1000 < now) {
     yield signOut();
     return;

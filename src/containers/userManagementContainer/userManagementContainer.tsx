@@ -1,5 +1,8 @@
 import React, { Dispatch, useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
+import classNames from 'classnames';
+import openSocket from 'socket.io-client';
+
 import { AppActionTypes } from '../../store/appActionTypes';
 import { HomeActionCreators } from '../../store/actionCreators/homeActionCreators';
 import { ActiveSection } from '../../domain/enums/activeSection';
@@ -7,12 +10,11 @@ import { IAppState } from '../../store/appState';
 import { IUser } from '../../domain/models/user';
 import { UserManagementActionCreators } from '../../store/actionCreators/userManagementActionCreators';
 import PageWithSidePanelComponent from '../../components/pageWithSidePanelComponent/pageWithSidePanelComponent';
-
-import './userManagementContainer.scss';
-import classNames from 'classnames';
 import UsersManagementComponent from '../../components/usersManagementComponent/usersManagementComponent';
 import AddUserModalComponent from '../../components/addUserModalComponent/addUserModalComponent';
 import { IUserForSaving } from '../../domain/models/userForSaving';
+
+import './userManagementContainer.scss';
 
 export interface IUserManagementContainerProps {
   users?: IUser[];
@@ -23,12 +25,22 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
 
   const [selected, setSelected] = useState<'Users'>();
   const [addUserOpen, setAddUserOpen] = useState(false);
+  const [userToEdit, setUserToEdit] = useState<IUser | undefined>(undefined);
 
   useEffect(() => {
     dispatch(HomeActionCreators.changeActiveSection(ActiveSection.UserManager));
+    const socket = openSocket(process.env.REACT_APP_API_ADDRESS as string);
+    socket.on('users', (data: { action: 'create'; user: IUser } | { action: 'delete'; email: string }) => {
+      if (data.action === 'create') {
+        dispatch(UserManagementActionCreators.userSaved(data.user));
+      } else if (data.action === 'delete') {
+        dispatch(UserManagementActionCreators.userDeleted(data.email));
+      }
+    });
 
     return () => {
       HomeActionCreators.changeActiveSection(undefined);
+      socket.close();
     };
   }, [dispatch]);
 
@@ -42,6 +54,7 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
 
   const addUserClicked = () => {
     setAddUserOpen(true);
+    setUserToEdit(undefined);
   };
 
   const onCloseAddUserModal = () => {
@@ -50,6 +63,15 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
 
   const onSaveUser = (user: IUserForSaving) => {
     dispatch(UserManagementActionCreators.saveUser(user));
+  };
+
+  const onDeleteUser = (email: string) => {
+    dispatch(UserManagementActionCreators.deleteUser(email));
+  };
+
+  const onEditUser = (user: IUser) => {
+    setUserToEdit(user);
+    setAddUserOpen(true);
   };
 
   const sideContent = () => {
@@ -75,9 +97,19 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
       <PageWithSidePanelComponent
         sidePanelContent={sideContent()}
         showHistoryBack={true}
-        pageContent={selected === 'Users' ? <UsersManagementComponent users={props.users} /> : null}
+        pageContent={
+          selected === 'Users' ? (
+            <UsersManagementComponent users={props.users} onDeleteUser={onDeleteUser} onEditUser={onEditUser} />
+          ) : null
+        }
       />
-      <AddUserModalComponent onSubmit={onSaveUser} visible={addUserOpen} onClose={onCloseAddUserModal} />
+      <AddUserModalComponent
+        onSubmit={onSaveUser}
+        visible={addUserOpen}
+        onClose={onCloseAddUserModal}
+        editMode={userToEdit !== undefined}
+        user={userToEdit}
+      />
     </>
   );
 };

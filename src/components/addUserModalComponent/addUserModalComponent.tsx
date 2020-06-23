@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Input, Button } from 'rsuite';
 
 import { IUserForSaving } from '../../domain/models/userForSaving';
+import { RoleType } from '../../domain/enums/roleType';
+import { IUser } from '../../domain/models/user';
 
 import './addUserModalComponent.scss';
-import { RoleType } from '../../domain/enums/roleType';
 
 export interface IAddUserModalComponentProps {
   visible: boolean;
+  editMode: boolean;
+  user?: IUser;
   onClose: () => void;
   onSubmit: (user: IUserForSaving) => void;
 }
 
 const AddUserModalComponent: React.FC<IAddUserModalComponentProps> = (props: IAddUserModalComponentProps) => {
-  const [email, setEmail] = useState('');
+  const editEmail = props.user ? (props.editMode ? props.user.email : '') : '';
+
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState('');
 
-  const submitHandler = () => {
-    props.onSubmit({ email: email, password: password, role: RoleType.Employee });
-  };
+  useEffect(() => {
+    setEmail(editEmail);
+  }, [editEmail]);
 
   const clearState = () => {
     setEmail('');
     setPassword('');
+  };
+
+  const submitHandler = () => {
+    props.onSubmit({ email: email, password: password, role: RoleType.Employee });
+    props.onClose();
   };
 
   return (
@@ -44,6 +54,7 @@ const AddUserModalComponent: React.FC<IAddUserModalComponentProps> = (props: IAd
             type="Password"
             value={password}
             onChange={setPassword}
+            disabled={props.editMode}
           ></Input>
         </div>
         <Button className="AddUserModalComponent__save-button" color="green" onClick={submitHandler}>

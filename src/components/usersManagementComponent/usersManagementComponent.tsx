@@ -3,9 +3,12 @@ import { IUser } from '../../domain/models/user';
 
 import './usersManagementComponent.scss';
 import { Loader } from 'rsuite';
+import UserItemComponent from '../userItemComponent/userItemComponent';
 
 interface IUsersManagementComponentProps {
   users?: IUser[];
+  onDeleteUser: (email: string) => void;
+  onEditUser: (user: IUser) => void;
 }
 
 const UsersManagementComponent: React.FC<IUsersManagementComponentProps> = (props: IUsersManagementComponentProps) => {
@@ -16,7 +19,9 @@ const UsersManagementComponent: React.FC<IUsersManagementComponentProps> = (prop
           'No Users!'
         ) : (
           props.users.map(user => {
-            return <div key={user.email}>{user.email}</div>;
+            return (
+              <UserItemComponent key={user.email} user={user} onDelete={props.onDeleteUser} onEdit={props.onEditUser} />
+            );
           })
         )
       ) : (
