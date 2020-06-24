@@ -30,11 +30,13 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
   useEffect(() => {
     dispatch(HomeActionCreators.changeActiveSection(ActiveSection.UserManager));
     const socket = openSocket(process.env.REACT_APP_API_ADDRESS as string);
-    socket.on('users', (data: { action: 'create'; user: IUser } | { action: 'delete'; email: string }) => {
+    socket.on('users', (data: { action: 'create' | 'update'; user: IUser } | { action: 'delete'; email: string }) => {
       if (data.action === 'create') {
         dispatch(UserManagementActionCreators.userSaved(data.user));
       } else if (data.action === 'delete') {
         dispatch(UserManagementActionCreators.userDeleted(data.email));
+      } else if (data.action === 'update') {
+        dispatch(UserManagementActionCreators.userEdited(data.user));
       }
     });
 
@@ -62,7 +64,11 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
   };
 
   const onSaveUser = (user: IUserForSaving) => {
-    dispatch(UserManagementActionCreators.saveUser(user));
+    if (userToEdit) {
+      dispatch(UserManagementActionCreators.editUser(user));
+    } else {
+      dispatch(UserManagementActionCreators.saveUser(user));
+    }
   };
 
   const onDeleteUser = (email: string) => {

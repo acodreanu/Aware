@@ -27,9 +27,10 @@ const userProfileLoaded = (user: IUser): UserProfileLoaded => {
   };
 };
 
-const signUp = (email: string, role: RoleType, password: string, confirmPassword: string): SignUp => {
+const signUp = (name: string, email: string, role: RoleType, password: string, confirmPassword: string): SignUp => {
   return {
     type: SIGN_UP,
+    name: name,
     email: email,
     role: role,
     password: password,

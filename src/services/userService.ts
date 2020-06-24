@@ -4,6 +4,7 @@ import { RoleType } from '../domain/enums/roleType';
 import { IUserForSaving } from '../domain/models/userForSaving';
 
 async function signUp(
+  name: string,
   email: string,
   role: RoleType,
   password: string,
@@ -11,6 +12,7 @@ async function signUp(
 ): Promise<IUser | undefined> {
   const apiClient = createApiClient();
   const model = {
+    name: name,
     email: email,
     role: role,
     password: password,
@@ -62,6 +64,17 @@ async function saveUser(user: IUserForSaving): Promise<boolean> {
   }
 }
 
+async function editUser(user: IUserForSaving): Promise<boolean> {
+  const apiClient = createApiClient();
+
+  try {
+    const response = await apiClient.put<boolean, IUserForSaving>('users/', user);
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+}
+
 async function deleteUser(email: string): Promise<boolean> {
   const apiClient = createApiClient();
 
@@ -73,4 +86,4 @@ async function deleteUser(email: string): Promise<boolean> {
   }
 }
 
-export { signUp, login, getUsers, saveUser, deleteUser };
+export { signUp, login, getUsers, saveUser, deleteUser, editUser };

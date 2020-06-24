@@ -22,6 +22,7 @@ const UserItemComponent: React.FC<IUserItemComponentProps> = (props: IUserItemCo
 
   return (
     <div className="UserItemComponent">
+      <p className="UserItemComponent__email">{props.user.name}</p>
       <p className="UserItemComponent__email">{props.user.email}</p>
       <p className="UserItemComponent__role">{props.user.role}</p>
       <div>

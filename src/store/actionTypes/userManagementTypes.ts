@@ -7,6 +7,8 @@ export const SAVE_USER = 'SAVE_USER';
 export const USER_SAVED = 'USER_SAVED';
 export const DELETE_USER = 'DELETE_USER';
 export const USER_DELETED = 'USER_DELETED';
+export const EDIT_USER = 'EDIT_USER';
+export const USER_EDITED = 'USER_EDITED';
 
 export type LoadUsers = {
   type: typeof LOAD_USERS;
@@ -27,6 +29,16 @@ export type UserSaved = {
   user: IUser;
 };
 
+export type EditUser = {
+  type: typeof EDIT_USER;
+  user: IUserForSaving;
+};
+
+export type UserEdited = {
+  type: typeof USER_EDITED;
+  user: IUser;
+};
+
 export type DeleteUser = {
   type: typeof DELETE_USER;
   email: string;
@@ -37,4 +49,12 @@ export type UserDeleted = {
   email: string;
 };
 
-export type UserManagementTypes = LoadUsers | UsersLoaded | SaveUser | UserSaved | DeleteUser | UserDeleted;
+export type UserManagementTypes =
+  | LoadUsers
+  | UsersLoaded
+  | SaveUser
+  | UserSaved
+  | DeleteUser
+  | UserDeleted
+  | EditUser
+  | UserEdited;

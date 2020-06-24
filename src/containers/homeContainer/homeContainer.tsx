@@ -31,8 +31,8 @@ const HomeContainer: React.FC<IHomeContainerProps> = (properties: IHomeContainer
     dispatch(HomeActionCreators.loggingIn(!properties.loggingIn));
   };
 
-  const onSignUpSubmit = (email: string, password: string, confirmPassword: string) => {
-    dispatch(AuthActionCreators.signUp(email, RoleType.Manager, password, confirmPassword));
+  const onSignUpSubmit = (name: string, email: string, password: string, confirmPassword: string) => {
+    dispatch(AuthActionCreators.signUp(name, email, RoleType.Manager, password, confirmPassword));
   };
 
   const onLoginSubmit = (email: string, password: string) => {

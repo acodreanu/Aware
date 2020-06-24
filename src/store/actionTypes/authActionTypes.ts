@@ -29,6 +29,7 @@ export type SignOut = {
 
 export type SignUp = {
   type: typeof SIGN_UP;
+  name: string;
   email: string;
   role: RoleType;
   password: string;

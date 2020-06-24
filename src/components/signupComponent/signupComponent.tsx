@@ -4,7 +4,7 @@ import { Input, Button } from 'rsuite';
 import './signupComponent.scss';
 
 export interface ISignupComponentProps {
-  onSubmit: (email: string, password: string, confirmPassword: string) => void;
+  onSubmit: (name: string, email: string, password: string, confirmPassword: string) => void;
 }
 
 const SignupComponent: React.FC<ISignupComponentProps> = (props: ISignupComponentProps) => {
@@ -13,7 +13,7 @@ const SignupComponent: React.FC<ISignupComponentProps> = (props: ISignupComponen
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const onSubmitHandler = () => {
-    props.onSubmit(email, password, confirmPassword);
+    props.onSubmit(email, email, password, confirmPassword);
   };
 
   return (

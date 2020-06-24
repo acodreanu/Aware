@@ -1,4 +1,10 @@
-import { UserManagementTypes, USERS_LOADED, USER_SAVED, USER_DELETED } from '../actionTypes/userManagementTypes';
+import {
+  UserManagementTypes,
+  USERS_LOADED,
+  USER_SAVED,
+  USER_DELETED,
+  USER_EDITED
+} from '../actionTypes/userManagementTypes';
 import { initialUserManagementState, IUserManagementState } from '../states/userManagementState';
 
 export const userManagementReducer = (
@@ -23,6 +29,20 @@ export const userManagementReducer = (
         return {
           ...state,
           users: state.users.filter(u => u.email !== action.email)
+        };
+      }
+
+      return state;
+    }
+    case USER_EDITED: {
+      if (state.users) {
+        const userIndex = state.users.findIndex(u => u.email === action.user.email);
+        const newUsers = [...state.users];
+        newUsers[userIndex] = action.user;
+
+        return {
+          ...state,
+          users: newUsers
         };
       }
 

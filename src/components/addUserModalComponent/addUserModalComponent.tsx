@@ -17,13 +17,16 @@ export interface IAddUserModalComponentProps {
 
 const AddUserModalComponent: React.FC<IAddUserModalComponentProps> = (props: IAddUserModalComponentProps) => {
   const editEmail = props.user ? (props.editMode ? props.user.email : '') : '';
+  const editName = props.user ? (props.editMode ? props.user.name : '') : '';
 
   const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
     setEmail(editEmail);
-  }, [editEmail]);
+    setName(editName);
+  }, [editEmail, editName]);
 
   const clearState = () => {
     setEmail('');
@@ -31,7 +34,7 @@ const AddUserModalComponent: React.FC<IAddUserModalComponentProps> = (props: IAd
   };
 
   const submitHandler = () => {
-    props.onSubmit({ email: email, password: password, role: RoleType.Employee });
+    props.onSubmit({ name: name, email: email, password: password, role: RoleType.Employee });
     props.onClose();
   };
 
@@ -44,8 +47,17 @@ const AddUserModalComponent: React.FC<IAddUserModalComponentProps> = (props: IAd
       <Modal.Header closeButton={true}></Modal.Header>
       <Modal.Body className="AddUserModalComponent__body">
         <div className="AddUserModalComponent__group">
+          <label className="AddUserModalComponent__label">Name</label>
+          <Input className="AddUserModalComponent__input" value={name} onChange={setName}></Input>
+        </div>
+        <div className="AddUserModalComponent__group">
           <label className="AddUserModalComponent__label">Email</label>
-          <Input className="AddUserModalComponent__input" value={email} onChange={setEmail}></Input>
+          <Input
+            className="AddUserModalComponent__input"
+            value={email}
+            disabled={props.editMode}
+            onChange={setEmail}
+          ></Input>
         </div>
         <div className="AddUserModalComponent__group">
           <label className="AddUserModalComponent__label">Password</label>

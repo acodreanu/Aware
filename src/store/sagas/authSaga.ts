@@ -40,6 +40,7 @@ function* checkUserInfo() {
 
   yield put(
     AuthActionCreators.userProfileLoaded({
+      name: profile.name,
       email: profile.email,
       id: profile.id,
       role: profile.role
@@ -48,7 +49,14 @@ function* checkUserInfo() {
 }
 
 function* signUpApiCall(action: SignUp) {
-  const result: IUser = yield call(signUp, action.email, action.role, action.password, action.confirmPassword);
+  const result: IUser = yield call(
+    signUp,
+    action.name,
+    action.email,
+    action.role,
+    action.password,
+    action.confirmPassword
+  );
 
   if (result) {
     NotificationHelper.success('User created!');
