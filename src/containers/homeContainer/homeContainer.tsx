@@ -19,7 +19,7 @@ export interface IHomeContainerProps {
 }
 
 const HomeContainer: React.FC<IHomeContainerProps> = (properties: IHomeContainerProps) => {
-  const name = useSelector<IAppState, string>(s => s.authState.user?.email as string);
+  const name = useSelector<IAppState, string>(s => s.authState.user?.name as string);
 
   const dispatch = useDispatch<Dispatch<AppActionTypes>>();
 
@@ -38,8 +38,6 @@ const HomeContainer: React.FC<IHomeContainerProps> = (properties: IHomeContainer
   const onLoginSubmit = (email: string, password: string) => {
     dispatch(AuthActionCreators.signIn(email, password));
   };
-
-  console.log(name);
 
   const renderMainPart = () => {
     if (name) {

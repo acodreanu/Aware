@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b8183fbe-a606-490e-9f12-40feb89b5034/resourceGroups/awarebe/providers/Microsoft.Web/sites/AwareFE",
+    "appService.deploySubpath": "build"
+}
