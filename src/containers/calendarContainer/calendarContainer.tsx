@@ -26,7 +26,7 @@ const CalendarContainer: React.FC<ICalendarContainerProps> = (properties: ICalen
 
   const onEditDate = (date: Date, option?: DropDownOptions) => {
     // dispatch()
-  }
+  };
 
   return <CalendarComponent onSubmit={onEditDate} days={23}></CalendarComponent>;
 };
