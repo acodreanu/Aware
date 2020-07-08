@@ -1,0 +1,26 @@
+.DateEditModalComponent {
+  &__dropdown-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__dropdown {
+
+    .rs-dropdown-toggle, .rs-dropdown-toggle.rs-btn {
+      height: 40px;
+      width: 180px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: silver;
+    }
+
+    .rs-dropdown-menu {
+      width: 100%;
+      border-style: solid;
+      border-width: 1px;
+      border-color: silver;
+    }
+  }
+}

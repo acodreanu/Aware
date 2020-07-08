@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
+    max-width: 300px;
   }
 
   &_animated {
@@ -42,7 +43,7 @@
     z-index: -1;
   }
   100% {
-    top: 0px;
+    top: 100px;
     z-index: auto;
   }
 }

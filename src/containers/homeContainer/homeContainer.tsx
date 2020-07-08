@@ -51,23 +51,21 @@ const HomeContainer: React.FC<IHomeContainerProps> = (properties: IHomeContainer
     } else {
       return (
         <div className="HomeContainer__buttons">
-          {/* {!properties.isAuthenticated ? ( */}
-          <>
+          <div>
             <Button className="HomeContainer__button" color="orange" size="lg" onClick={onSignInClick}>
               Login
             </Button>
             <Button className="HomeContainer__button" color="cyan" size="lg" onClick={onSignUpClick}>
               Sign Up
             </Button>
-            {properties.signingUp ? <SignupComponent onSubmit={onSignUpSubmit}></SignupComponent> : null}
-            {properties.loggingIn ? <LoginComponent onSubmit={onLoginSubmit}></LoginComponent> : null}
-          </>
-          {/* ) : null} */}
+          </div>
+          {properties.signingUp ? <SignupComponent onSubmit={onSignUpSubmit}></SignupComponent> : null}
+          {properties.loggingIn ? <LoginComponent onSubmit={onLoginSubmit}></LoginComponent> : null}
         </div>
       );
       // return (
       // <GoogleLogin
-      //   clientId="588601611917-cljbf777480t1rkq6ggfctkmebflmi0k.apps.googleusercontent.com"
+      //   clientId=""
       //   buttonText="Sign In with Google"
       //   onFailure={errorHandler}
       //   cookiePolicy={'single_host_origin'}

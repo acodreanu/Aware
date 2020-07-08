@@ -39,31 +39,25 @@ const renderManagerItems = (selected?: ActiveSection) => {
   );
 };
 
-// const renderAgentItems = (selected?: ActiveSection) => {
-//   return (
-//     <>
-//       <Whisper {...getWhisperProps('Work')}>
-//         <Link className={linkClass(ActiveSection.Work, selected)} to="/conversation">
-//           <Icon className={iconClass(ActiveSection.Work, selected)} icon="briefcase" />
-//         </Link>
-//       </Whisper>
-//       <Whisper {...getWhisperProps('Search')}>
-//         <Link className={linkClass(ActiveSection.Search, selected)} to="/chat-search">
-//           <Icon className={iconClass(ActiveSection.Search, selected)} icon="search" />
-//         </Link>
-//       </Whisper>
-//     </>
-//   );
-// };
+const renderAgentItems = (selected?: ActiveSection) => {
+  return (
+    <>
+      <Whisper {...getWhisperProps('Calendar')}>
+        <Link className={linkClass(ActiveSection.Calendar, selected)} to="/calendar">
+          <Icon className={iconClass(ActiveSection.Calendar, selected)} icon="calendar" />
+        </Link>
+      </Whisper>
+    </>
+  );
+};
 
 const SideMenuComponent: React.FC<ISideMenuComponentProps> = (properties: ISideMenuComponentProps) => {
-  console.log(properties.roleType);
   const renderUpsideItems = () => {
     if (properties.roleType === RoleType.Manager) {
       return renderManagerItems(properties.activeSection);
-    } //else {
-    // return renderAgentItems(properties.activeSection);
-    // }
+    } else {
+      return renderAgentItems(properties.activeSection);
+    }
   };
 
   const renderDownsideItems = () => {

@@ -1,3 +1,4 @@
 export enum ActiveSection {
-  UserManager = 'UserManager'
+  UserManager = 'UserManager',
+  Calendar = 'Calendar'
 }

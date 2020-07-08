@@ -18,15 +18,15 @@ const SignupComponent: React.FC<ISignupComponentProps> = (props: ISignupComponen
 
   return (
     <div className="SignupComponent">
-      <div className="SignupComponent__input-group">
+      <div className="SignupComponent__input-group SignupComponent_animated">
         <p className="SignupComponent__label">Email</p>
         <Input className="SignupComponent__input" value={email} onChange={setEmail}></Input>
       </div>
-      <div className="SignupComponent__input-group">
+      <div className="SignupComponent__input-group SignupComponent_animated">
         <p className="SignupComponent__label">Password</p>
         <Input type="password" className="SignupComponent__input" value={password} onChange={setPassword}></Input>
       </div>
-      <div className="SignupComponent__input-group">
+      <div className="SignupComponent__input-group SignupComponent_animated">
         <p className="SignupComponent__label">Confirm Password</p>
         <Input
           type="password"
@@ -35,7 +35,7 @@ const SignupComponent: React.FC<ISignupComponentProps> = (props: ISignupComponen
           onChange={setConfirmPassword}
         ></Input>
       </div>
-      <Button className="SignupComponent__signUp" color="green" onClick={onSubmitHandler}>
+      <Button className="SignupComponent__signUp SignupComponent_animated" color="green" onClick={onSubmitHandler}>
         Sign Up!
       </Button>
     </div>

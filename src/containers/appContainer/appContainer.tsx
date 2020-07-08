@@ -21,6 +21,13 @@ const demoContainerLoader = loadable(
   }
 );
 
+const calendarContainerLoader = loadable(
+  () => import('../calendarContainer/calendarContainer' /* webpackChunkName: 'calendarContainer' */),
+  {
+    fallback: <Loader center={true} content={'Loading'} />
+  }
+);
+
 const homeContainerLoader = loadable(
   () => import('../homeContainer/homeContainer' /* webpackChunkName: 'homeContainer' */),
   {
@@ -72,6 +79,7 @@ const AppContainer: React.FC = () => {
       <div className="AppContainer__content">
         <Switch>
           <Route exact={true} path="/user-management" component={userManagementContainerLoader} />
+          <Route exact={true} path="/calendar" component={calendarContainerLoader} />
           <Route exact={true} path="/example" component={demoContainerLoader} />
           <Route exact={true} path="/" component={homeContainerLoader} />
         </Switch>

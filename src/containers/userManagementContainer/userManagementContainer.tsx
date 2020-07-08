@@ -41,7 +41,7 @@ const UserManagementContainer: React.FC<IUserManagementContainerProps> = (props:
     });
 
     return () => {
-      HomeActionCreators.changeActiveSection(undefined);
+      dispatch(HomeActionCreators.changeActiveSection(undefined));
       socket.close();
     };
   }, [dispatch]);
